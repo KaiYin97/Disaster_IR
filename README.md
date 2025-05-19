@@ -1,6 +1,6 @@
 # DisastIR
 The source code for DisastIR: A Comprehensive Information Retrieval Benchmark for Disaster Management.
-We develop a complete end-to-end pipeline for constructing Disaster Information Retrieval (DisastIR) benchmark from scratch, starting from PDF download and text extraction, through semantic chunking and deduplication, to user query generation, labeling-pool construction, and final relevance scoring.
+We develop this complete end-to-end pipeline for constructing Disaster Information Retrieval (DisastIR) benchmark from scratch, starting from PDF download and text extraction, through semantic chunking and deduplication, to user query generation, labeling-pool construction, and final relevance scoring.
 
 ---
 
