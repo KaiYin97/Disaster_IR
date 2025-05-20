@@ -76,7 +76,7 @@ def main():
             print(f"Building label pool for {Path(q_json).stem} with {model_name}")
             lpb.build_for_file(q_json, model_name, retriever)
 
-    print("✓ Label pool construction completed!")
+    print("Label pool construction completed!")
 
 
 if __name__ == "__main__":
