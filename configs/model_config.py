@@ -2,13 +2,12 @@ import os
 import torch
 from pathlib import Path
 
-# Model cache directory to avoid re-downloading
 MODEL_CACHE_DIR = os.getenv("DISASTIR_MODEL_CACHE", str(Path.home() / ".cache" / "models"))
 
-# Default hyperparameters for retrieval
+
 DEFAULT_BATCH   = 32
 DEFAULT_MAXLEN  = 256
-DEFAULT_TOPK    = 10  # Top-K retrieval candidates
+DEFAULT_TOPK    = 10  
 
 # Pooling strategy or encoding flag for each model
 MODEL_CONFIGS = {

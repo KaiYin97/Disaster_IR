@@ -8,10 +8,10 @@ RETRY_DELAY            = 5
 DEFAULT_TEMPERATURE    = 0.0  
 
 # —— Tokenizer / Generation Limits ——
-DEFAULT_MAX_TOKENS_SCORE   = 10   # For scoring outputs
-DEFAULT_MAX_TOKENS_WILLIAM = 25   # For short text generations
-ITEMS_PER_PART             = 50   # Batch size when splitting work
-SAVE_INTERVAL              = 10   # Save progress every N items
+DEFAULT_MAX_TOKENS_SCORE   = 10   
+DEFAULT_MAX_TOKENS_WILLIAM = 25  
+ITEMS_PER_PART             = 50   
+SAVE_INTERVAL              = 10  
 
 # —— Query Prefix Mapping ——
 TASK2PREFIX = {
