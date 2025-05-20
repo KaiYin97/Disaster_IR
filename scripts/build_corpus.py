@@ -53,7 +53,7 @@ if __name__ == "__main__":
         "--keywords_json",
         type=Path,
         required=True,
-        help="This json is in scripts/disaster_type.json"
+        help="This json is in Disaster_IR/configs/disaster_type.json"
     )
     args = parser.parse_args()
     main(args.keywords_json)
