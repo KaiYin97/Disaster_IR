@@ -1,5 +1,5 @@
 # DisastIR
-The source code for DisastIR: A Comprehensive Information Retrieval Benchmark for Disaster Management.
+The source code for **DisastIR: A Comprehensive Information Retrieval Benchmark for Disaster Management.**
 We develop this complete end-to-end pipeline for constructing Disaster Information Retrieval (DisastIR) benchmark from scratch, starting from PDF download and text extraction, through semantic chunking and deduplication, to user query generation, labeling-pool construction, and final relevance scoring.
 
 ---
@@ -153,3 +153,5 @@ python scripts/relevance_scoring.py \
 - Adjust `configs/*_config.py` for batch sizes, retrials.  
 - Run in parallel by splitting file_index/part_index.  
 - Monitor OpenAI usage for quotas.
+
+
