@@ -339,11 +339,11 @@ python scripts/relevance_scoring.py   --task QA   --file_index 0   --part_index 
   {
     "original_query": "...",
     "passage": "...",
-    "score_phase4": 2,
-    "score_cot": 1,
-    "score_zero_shot": 2,
+    "score_phase4": 1,
+    "score_cot": 2,
+    "score_zero_shot": 3,
     "score_majority_vote": 2,
-    "score_average": 1.67
+    "score_average": 2
   }
   ```
 ---
