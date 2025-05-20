@@ -16,13 +16,13 @@ class PDFDownloader:
     def __init__(self, save_root: Path = RAW_PDF_ROOT):
         self.save_root = Path(save_root)
         self.save_root.mkdir(parents=True, exist_ok=True)
-        # 存储已下载 PDF 路径到 URL 的映射
+        # Path-to-URL mapping for downloaded PDFs
         self.result_json = self.save_root.parent / "download_pdf_url.json"
         self._url_map = self._load_url_map()
 
     def run(self, keywords_json: Path):
         """
-        根据 keywords_json 中的关键词列表，下载对应的 PDF 文件。
+        Download PDFs based on a list of keywords.
         """
         with open(keywords_json, "r", encoding="utf-8") as f:
             keywords = json.load(f)
@@ -48,13 +48,13 @@ class PDFDownloader:
                 if pdf_count >= MAX_PDFS_PER_KEYWORD:
                     break
 
-            # 每个关键词搜索后稍作休息，防止被封
+            # Wait to avoid Google blocking after each keyword
             time.sleep(GOOGLE_PAUSE_SEC)
 
     @staticmethod
     def _safe_search(query: str, retries: int = 3) -> list[str]:
         """
-        封装 googlesearch.search，遇到 429 错误重试并等待。
+        Wrapper for Google search with HTTP 429 retry handling.
         """
         for attempt in range(retries):
             try:
@@ -71,7 +71,7 @@ class PDFDownloader:
     @staticmethod
     def _download(url: str, path: Path) -> bool:
         """
-        下载单个 PDF 文件，返回是否成功。
+        Download a single PDF from URL to disk.
         """
         headers = {
             "User-Agent": (
@@ -92,18 +92,24 @@ class PDFDownloader:
             return False
 
     def _load_url_map(self) -> dict:
+        """
+        Load existing URL mapping if it exists.
+        """
         if self.result_json.exists():
             with open(self.result_json, "r", encoding="utf-8") as f:
                 return json.load(f)
         return {}
 
     def _save_url_map(self) -> None:
+        """
+        Save updated URL mapping to disk.
+        """
         with open(self.result_json, "w", encoding="utf-8") as f:
             json.dump(self._url_map, f, ensure_ascii=False, indent=2)
 
     @staticmethod
     def _sanitize_folder_name(name: str) -> str:
         """
-        将关键词转为安全的文件夹名称，只保留字母、数字、空格和下划线。
+        Make folder name filesystem-safe.
         """
         return "".join(c if c.isalnum() or c in (" ", "_") else "_" for c in name).strip()
