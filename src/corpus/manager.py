@@ -25,7 +25,7 @@ class CorpusManager:
         json.dump(corpus,
                   open(self.ordered_json, "w", encoding="utf-8"),
                   ensure_ascii=False)
-        print(f"✓ built corpus {self.ordered_json} ({len(corpus):,d})")
+        print(f"built corpus {self.ordered_json} ({len(corpus):,d})")
         return corpus
 
     def load(self) -> List[str]:

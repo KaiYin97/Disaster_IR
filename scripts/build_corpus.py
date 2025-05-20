@@ -53,7 +53,7 @@ if __name__ == "__main__":
         "--keywords_json",
         type=Path,
         required=True,
-        help="Path to JSON file containing a list of search keywords"
+        help="This json is in scripts/disaster_type.json"
     )
     args = parser.parse_args()
     main(args.keywords_json)
