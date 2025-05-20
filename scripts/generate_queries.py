@@ -5,10 +5,9 @@ import argparse
 import sys
 from pathlib import Path
 
-# ensure src on PYTHONPATH for imports
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
-from src.query.pipeline import run_passage_tasks, run_document_qa
+from src.query.pipeline import run_passage_tasks, run_document_qa 
 
 def main():
     parser = argparse.ArgumentParser(

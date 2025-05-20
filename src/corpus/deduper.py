@@ -108,7 +108,6 @@ class EmbeddingDeduper:
                     if m.idx != src and m.similarity >= MINHASH_THRESHOLD:
                         union(src, m.idx)
 
-        # pick one representative per cluster
         clusters = defaultdict(list)
         for idx in range(len(contents)):
             clusters[find(idx)].append(idx)

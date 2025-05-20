@@ -39,8 +39,8 @@ def main():
     qe = QueryEmbedder(
         test_query_dir=TEST_QUERY_DIR,
         out_dir=QUERY_EMB_DIR,
-        batch=DEFAULT_TOPK,        # reuse DEFAULT_TOPK for batch size
-        max_len=512,               # or adjust as needed
+        batch=DEFAULT_TOPK,        
+        max_len=512,               
         device=device,
         dtype=torch.float32,
     )
@@ -71,8 +71,7 @@ def main():
 
     for q_json in glob.glob(str(Path(TEST_QUERY_DIR) / "*.json")):
         for model_name, cfg in MODEL_CONFIGS.items():
-            if cfg.get("bm25"):
-                continue
+            
             print(f"Building label pool for {Path(q_json).stem} with {model_name}")
             lpb.build_for_file(q_json, model_name, retriever)
 

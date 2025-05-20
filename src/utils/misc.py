@@ -7,13 +7,7 @@ from typing import Optional
 
 
 def sanitize_folder_name(name: str) -> str:
-    """
-    Convert arbitrary string into a filesystem-safe folder name:
-    keep letters, numbers, spaces, hyphens and underscores.
-    """
-    # replace invalid chars with underscore
     safe = re.sub(r'[^A-Za-z0-9 _-]', '_', name)
-    # collapse multiple underscores/spaces
     safe = re.sub(r'[_\s]+', '_', safe).strip('_')
     return safe
 
@@ -37,8 +31,6 @@ def normalise(text: str) -> str:
     - Collapse whitespace
     """
     s = text.lower()
-    # keep alphanumeric and spaces
     s = re.sub(r'[^a-z0-9\s]', '', s)
-    # collapse whitespace
     s = re.sub(r'\s+', ' ', s).strip()
     return s

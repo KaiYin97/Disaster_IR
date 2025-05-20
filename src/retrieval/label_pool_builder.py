@@ -5,7 +5,7 @@ from pathlib import Path
 import numpy as np
 from filelock import FileLock
 
-from utils.io import load_test_file
+from src.utils.io import load_test_file
 
 class LabelPoolBuilder:
     """
@@ -33,11 +33,9 @@ class LabelPoolBuilder:
             print(f"[WARN] missing q_emb for {model} → {stem}")
             return
 
-        # load query embeddings and perform retrieval
         q_emb = np.load(str(q_emb_fp))
         results = retriever.retrieve(model, q_emb)
 
-        # load original data and attach baseline_results + label_pool
         data, _ = load_test_file(query_json)
         for i, d in enumerate(data):
             d.setdefault("baseline_results", {})
@@ -48,7 +46,6 @@ class LabelPoolBuilder:
             d["label_pool"].extend(results["ann"][i])
             d["label_pool"] = self._dedup(d["label_pool"])
 
-        # write out merged label pool
         out_fp = self.out_dir / f"{stem}_label_pool.json"
         lock_fp = Path(str(out_fp) + ".lock")
         with FileLock(str(lock_fp)):

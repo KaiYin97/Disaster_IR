@@ -8,16 +8,9 @@ from tqdm import tqdm
 from typing import List, Tuple
 
 def cls_pool(hidden_states: Tensor, mask: Tensor) -> Tensor:
-    """
-    Pool using the [CLS] token embedding (first token).
-    """
     return hidden_states[:, 0]
 
 def last_token_pool(hidden_states: Tensor, mask: Tensor) -> Tensor:
-    """
-    Pool using the last non-padded token in each sequence.
-    """
-    # check if padding is left
     left_padded = (mask[:, -1].sum() == mask.size(0))
     if left_padded:
         return hidden_states[:, -1]
@@ -26,9 +19,6 @@ def last_token_pool(hidden_states: Tensor, mask: Tensor) -> Tensor:
     return hidden_states[torch.arange(batch_size, device=hidden_states.device), seq_lens]
 
 def mean_pool(hidden_states: Tensor, mask: Tensor) -> Tensor:
-    """
-    Pool by averaging token embeddings, ignoring padding.
-    """
     mask = mask.unsqueeze(-1).to(hidden_states.dtype)
     summed = (hidden_states * mask).sum(dim=1)
     counts = mask.sum(dim=1)
@@ -110,7 +100,6 @@ def embed_texts(
     if all_embs:
         embs = np.concatenate(all_embs, axis=0)
     else:
-        # return empty array if nothing succeeded
         hidden_size = model.config.hidden_size if hasattr(model, "config") and hasattr(model.config, "hidden_size") else 0
         embs = np.empty((0, hidden_size), dtype=np.float32)
 

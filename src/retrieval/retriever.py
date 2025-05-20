@@ -30,7 +30,7 @@ class Retriever:
         self.corpus = corpus
         self.top_k = top_k
         self.device = device
-        # move corpus embeddings to a torch tensor for fast matrix mul
+
         self.corpus_T = torch.tensor(corpus_emb, dtype=torch.float32, device=device)
         self.ann_idxs = ann_idxs
 
@@ -48,7 +48,7 @@ class Retriever:
         with torch.no_grad():
             sim = qT @ self.corpus_T.T
             _, idxs = sim.topk(self.top_k, dim=1)
-        # map back to raw text passages
+        
         return [[self.corpus[i] for i in row] for row in idxs.cpu().numpy()]
 
     def _ann(self, model: str, q_emb: np.ndarray) -> List[List[str]]:
@@ -63,7 +63,6 @@ class Retriever:
             List of top_k passages per query via ANN index.
         """
         hits = self.ann_idxs[model].search(q_emb, self.top_k, threads=1)
-        # each hit row is list of objects with .key = integer ID
         return [[self.corpus[int(h.key)] for h in row] for row in hits]
 
     def retrieve(self, model: str, q_emb: np.ndarray) -> Dict[str, List[List[str]]]:

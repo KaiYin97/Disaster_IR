@@ -10,7 +10,7 @@ import torch
 from tqdm import tqdm
 from transformers import AutoTokenizer, AutoModel
 
-from utils.embed         import embed_texts
+from src.utils.embed         import embed_texts
 from configs.path_config import TEST_QUERY_DIR, QUERY_EMB_DIR
 from configs.model_config import (
     MODEL_CONFIGS,
@@ -53,7 +53,6 @@ class QueryEmbedder:
         model_dir = self.out_dir / slug
         model_dir.mkdir(exist_ok=True)
 
-        # load tokenizer and model from cache
         tokenizer = AutoTokenizer.from_pretrained(
             name, trust_remote_code=True, cache_dir=MODEL_CACHE_DIR
         )
@@ -61,7 +60,6 @@ class QueryEmbedder:
             name, trust_remote_code=True, cache_dir=MODEL_CACHE_DIR
         ).to(self.device).eval()
 
-        # iterate over all JSON query files
         for fp in glob.glob(str(self.test_query_dir / "*.json")):
             stem = Path(fp).stem
             np_out = model_dir / f"{stem}.npy"
@@ -76,7 +74,6 @@ class QueryEmbedder:
                 for item in data
             ]
 
-            # batch-encode and normalize embeddings
             embs, valid = embed_texts(
                 model,
                 tokenizer,
@@ -90,14 +87,11 @@ class QueryEmbedder:
                 desc=f"{slug}-{stem}"
             )
 
-            # warn if some queries failed
             if len(valid) != len(queries):
                 print(f"[WARN] {name} ({stem}): embedded {len(valid)}/{len(queries)} queries")
 
-            # save embeddings to disk
             np.save(np_out, embs.astype(np.float32))
 
-        # release GPU memory
         del model, tokenizer
         torch.cuda.empty_cache()
 
@@ -107,9 +101,6 @@ class QueryEmbedder:
         Skip BM25 models and respect optional inclusion filter.
         """
         for name, cfg in MODEL_CONFIGS.items():
-            # skip non-embedding methods
-            if cfg.get("bm25"):
-                continue
             if only and name not in only:
                 continue
 

@@ -9,7 +9,7 @@ import torch
 from transformers import AutoTokenizer, AutoModel
 from usearch.index import Index
 
-from utils.embed         import embed_texts
+from src.utils.embed         import embed_texts
 from configs.path_config import BASELINE_INDEX_DIR
 from configs.model_config import (
     MODEL_CONFIGS,
@@ -28,25 +28,16 @@ class IndexBuilder:
         device: str = DEVICE,
         dtype: torch.dtype = DTYPE
     ):
-        """
-        Prepare index cache directory and set device/dtype for embeddings.
-        """
         self.cache = Path(cache_dir)
         self.cache.mkdir(parents=True, exist_ok=True)
         self.device = device
         self.dtype = dtype
 
     def _emb_path(self, model_name: str) -> Path:
-        """
-        Return path for storing/loading numpy embeddings.
-        """
         fn = model_name.replace("/", "_") + ".fp32.npy"
         return self.cache / fn
 
     def _idx_path(self, model_name: str) -> Path:
-        """
-        Return path for saving/restoring Usearch index.
-        """
         fn = model_name.replace("/", "_") + ".usearch"
         return self.cache / fn
 
@@ -57,15 +48,11 @@ class IndexBuilder:
         corpus: list[str],
         rebuild: bool = False,
     ) -> np.ndarray:
-        """
-        Compute (or load) and cache dense embeddings for the corpus.
-        """
         emb_fp = self._emb_path(model_name)
         if emb_fp.exists() and not rebuild:
             return np.load(emb_fp, mmap_mode="r")
 
         print(f"→ encoding corpus with {model_name}")
-        # load tokenizer and model
         tok = AutoTokenizer.from_pretrained(
             model_name, trust_remote_code=True, cache_dir=MODEL_CACHE_DIR
         )
@@ -73,7 +60,6 @@ class IndexBuilder:
             model_name, trust_remote_code=True, cache_dir=MODEL_CACHE_DIR
         ).to(self.device).eval()
 
-        # embed in batches and normalize
         embs, _ = embed_texts(
             mdl,
             tok,
@@ -89,7 +75,6 @@ class IndexBuilder:
         embs = embs.astype(np.float32)
         np.save(emb_fp, embs)
 
-        # free GPU memory
         del mdl, tok
         torch.cuda.empty_cache()
         gc.collect()
@@ -109,7 +94,6 @@ class IndexBuilder:
         if idx_fp.exists() and not rebuild:
             return Index.restore(str(idx_fp))
 
-        # create a new Usearch index (inner-product metric)
         idx = Index(
             ndim=embs.shape[1],
             metric="ip",
@@ -118,7 +102,7 @@ class IndexBuilder:
             expansion_add=128,
             expansion_search=64
         )
-        # add all vector IDs and vectors
+
         idx.add(np.arange(len(embs), dtype=np.int64), embs, copy=True, threads=1)
         idx.save(str(idx_fp))
         return idx
@@ -133,7 +117,6 @@ class IndexBuilder:
         base_embs = None
 
         for name, cfg in MODEL_CONFIGS.items():
-            # only embed once with the first dense model
             if base_embs is None:
                 base_embs = self.corpus_embedding(name, cfg, corpus)
             # build or load ANN index

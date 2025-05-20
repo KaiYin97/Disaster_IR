@@ -13,7 +13,6 @@ class CorpusManager:
         self.ordered_json = Path(out_fp)
 
     def build(self) -> List[str]:
-        """Scan all .json in corpus_dir, flatten & save to ordered_json."""
         files = sorted(glob.glob(str(self.corpus_dir / "*.json")))
         corpus: List[str] = []
         for fp in files:

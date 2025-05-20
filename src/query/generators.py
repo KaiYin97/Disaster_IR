@@ -5,7 +5,7 @@ import random
 from pathlib import Path
 from typing import Dict, List
 
-from client import safe_generate
+from src.query.client import safe_generate
 from configs.gen_config import (
     PROMPTS_FILE,
     QA_QUERY_LENGTHS, QA_DIFFICULTIES, QA_CLARITIES, QA_NUM_WORDS,
@@ -14,7 +14,6 @@ from configs.gen_config import (
     NLI_QUERY_LENGTHS, NLI_DIFFICULTIES, NLI_CLARITIES, NLI_NUM_WORDS,
 )
 
-# load all prompt templates from external JSON
 PROMPTS = json.load(open(PROMPTS_FILE, "r", encoding="utf-8"))
 
 

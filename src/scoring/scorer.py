@@ -23,12 +23,12 @@ from configs.gen_config import (
     SAVE_INTERVAL,
     TASK2PREFIX,
 )
-
-from query.client import client  # already configured OpenAI client
-from scoring.raters.base import BaseRater
-from scoring.raters.phase4_rater  import Phase4Rater
-from scoring.raters.cot_rater     import ChainOfThoughtRater
-from scoring.raters.zeroshot_rater import ZeroShotRater
+ 
+from src.query.client import client  
+from src.scoring.raters.base import BaseRater
+from src.scoring.raters.phase4_rater  import Phase4Rater
+from src.scoring.raters.cot_rater     import ChainOfThoughtRater
+from src.scoring.raters.zeroshot_rater import ZeroShotRater
 
 
 def load_json(path: str, default: Any):
@@ -42,18 +42,12 @@ def load_json(path: str, default: Any):
 
 
 def dump_json(path: str, data: Any):
-    """
-    Write JSON to `path`, creating parent directories if needed.
-    """
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
 
 
 def calculate_final_scores(s1: Optional[int], s2: Optional[Any], s3: Any) -> Tuple[Any, Optional[float]]:
-    """
-    Combine three method scores into (majority_vote, average_score).
-    """
     vals = [v for v in (s1, s2, s3) if isinstance(v, (int, float))]
     if not vals:
         return None, None
@@ -62,10 +56,8 @@ def calculate_final_scores(s1: Optional[int], s2: Optional[Any], s3: Any) -> Tup
         return vals[0], avg
     cnt = Counter(vals)
     mode, freq = cnt.most_common(1)[0]
-    # if unique mode
     if list(cnt.values()).count(freq) == 1:
         return mode, avg
-    # else tie → use average
     return avg, avg
 
 
@@ -86,11 +78,9 @@ def process_part(
     end = (part_idx + 1) * ITEMS_PER_PART
     items = data[start:end]
 
-    # initialize existing results
     results = load_json(output_file, [])
     done_pairs = {(r.get("original_query"), r.get("passage")) for r in results}
 
-    # collect all (query, passage) to rate
     to_rate: List[Tuple[str, str]] = []
     for item in items:
         q = item.get("user_query")
@@ -104,7 +94,6 @@ def process_part(
     total = len(to_rate)
     print(f"{task}-Part{part_idx}: {total} pairs to process")
 
-    # initialize raters
     rater1 = Phase4Rater()
     rater2 = ChainOfThoughtRater()
     rater3 = ZeroShotRater()
@@ -143,14 +132,12 @@ def process_part(
 
             new_count += 1
             done_pairs.add((q, psg))
-            # checkpoint save
             if new_count % SAVE_INTERVAL == 0:
                 dump_json(output_file, results)
 
         except Exception as e:
             print(f"[ERR {task}] ({q[:30]} / {psg[:30]}): {e}")
 
-    # final save
     dump_json(output_file, results)
     print(f"Appended {new_count} new results to {output_file}")
 

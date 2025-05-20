@@ -1,13 +1,13 @@
-# src/scoring/raters/phase4_rater.py
+# RAG/code/Disaster_IR/src/scoring/raters/phase4_rater.py
 
-import json
 from typing import Dict, Optional, Tuple
 
 from openai import OpenAI
 from configs.gen_config import MODEL_NAME, MAX_RETRIES, RETRY_DELAY, DEFAULT_TEMPERATURE
-from utils.llm import call_gpt, parse_llm_json_response
 
 from .base import BaseRater, get_task_prompts
+from src.utils.llm import call_gpt, parse_llm_json_response
+
 
 class Phase4Rater(BaseRater):
     """
@@ -30,17 +30,16 @@ class Phase4Rater(BaseRater):
         sub_scores: Dict[str, Optional[int]] = {}
 
         for name, definition in prompts["criteria"].items():
-            # format decomposition prompt for this criterion
-            prompt = prompts["decomp_prompt_template"].format(
+            decomp_prompt = prompts["decomp_prompt_template"].format(
                 criterion_name=name.replace("_", " "),
                 criterion_definition=definition,
                 input1=input1,
                 input2=input2,
             )
             resp = call_gpt(
-                client=client,
+                
                 system_message=prompts["decomp_system"],
-                user_prompt=prompt,
+                user_prompt=decomp_prompt,
                 model=MODEL_NAME,
                 max_retries=MAX_RETRIES,
                 delay=RETRY_DELAY,
@@ -67,7 +66,7 @@ class Phase4Rater(BaseRater):
             **fmt
         )
         resp_final = call_gpt(
-            client=client,
+            
             system_message=prompts["final_system"],
             user_prompt=final_prompt,
             model=MODEL_NAME,
@@ -77,6 +76,7 @@ class Phase4Rater(BaseRater):
             max_tokens=30,
             response_format={"type": "json_object"},
         )
+
         key_name = "final_similarity_score" if task == "STS" else "final_relevance_score"
         valid_vals = list(range(6)) if task == "STS" else [0, 1, 2, 3]
         final_score = parse_llm_json_response(

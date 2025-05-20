@@ -1,5 +1,3 @@
-# src/corpus/processor.py
-
 import re
 import fitz
 import pandas as pd
@@ -94,3 +92,57 @@ class PDFProcessor:
         """
         df = pd.DataFrame(rows, columns=cols)
         df.to_csv(path.with_suffix(".csv"), index=False)
+
+
+class Cleaner:
+    """
+    Post-processing for extracted .txt files:
+     - Remove reference sections
+     - Filter out very short or garbled lines
+     - Drop empty files
+    """
+    def __init__(self, txt_root: Path = TXT_ROOT):
+        self.txt_root = Path(txt_root)
+
+    def run(self):
+        for sub in tqdm(sorted(self.txt_root.iterdir()), desc="Cleaning TXT"):
+            if not sub.is_dir():
+                continue
+            for txt_file in sorted(sub.glob("*.txt")):
+                raw = txt_file.read_text(encoding="utf-8")
+                cleaned = self._clean(raw)
+                if cleaned.strip():
+                    txt_file.write_text(cleaned, encoding="utf-8")
+                else:
+                    # remove entirely if nothing remains
+                    txt_file.unlink()
+
+    def _clean(self, text: str) -> str:
+        in_refs = False
+        out_lines = []
+        for ln in text.splitlines():
+            s = ln.strip()
+            # detect start of references section
+            if s.lower() in {"reference", "references"}:
+                in_refs = True
+                continue
+            if in_refs:
+                continue
+
+            # word/count heuristics
+            wc = len(s.split())
+            mwl = sum(len(w) for w in s.split()) / wc if wc else 0
+
+            # drop lines with common garble or punctuation artifacts
+            if any(tok in ln for tok in ("....", "���", ". . .", "\x07", "…")):
+                continue
+            if _NUMERIC_RE.match(s):
+                continue
+            if wc < 2 or mwl < 4:
+                continue
+            if _LINE_RE.search(ln):
+                continue
+
+            out_lines.append(ln)
+
+        return "\n".join(out_lines)

@@ -4,7 +4,6 @@
 import argparse
 from pathlib import Path
 
-# make sure 'src' is on PYTHONPATH so we can import our modules
 import sys
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
@@ -24,25 +23,20 @@ def main(keywords_json: Path):
     5. Semantic chunking
     6. Embedding-based deduplication
     """
-    # 1. Download PDFs
+   
     PDFDownloader().run(keywords_json)
 
-    # 2. Extract text from PDFs
     PDFProcessor().run()
 
-    # 3. Clean up raw text files
     Cleaner().run()
 
-    # 4. Remove near-duplicate chunks via MinHash
     MinHashDeduper().run()
 
-    # 5. Split cleaned, deduped text into semantic chunks
     Chunker().run()
 
-    # 6. Remove embedding-level duplicates among chunks
     EmbeddingDeduper().run()
 
-    print("✓ Corpus build completed!")
+    print("Corpus build completed!")
 
 
 if __name__ == "__main__":

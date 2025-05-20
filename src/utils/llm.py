@@ -10,11 +10,9 @@ import tiktoken
 
 from configs.gen_config import OPENAI_API_KEY, MODEL_NAME, MAX_RETRIES, RETRY_DELAY, DEFAULT_TEMPERATURE
 
-# set the OpenAI API key for all requests
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 client = OpenAI()
 
-# tokenizer for counting or inspecting tokens
 tokenizer = tiktoken.encoding_for_model(MODEL_NAME)
 
 
@@ -65,7 +63,6 @@ def parse_llm_json_response(
     Extract JSON object from LLM response, then return response[key].
     Raises if JSON parse fails, key is missing, wrong type, or invalid value.
     """
-    # try to extract a ```json ... ``` block first
     m = re.search(r'```json\s*([\s\S]*?)```', response)
     blob = m.group(1) if m else response
     try:
@@ -76,7 +73,6 @@ def parse_llm_json_response(
     if key not in data:
         raise KeyError(f"{method_name}: key '{key}' not found in JSON")
     value = data[key]
-    # allow int when expecting float
     if expected_type is float and isinstance(value, int):
         value = float(value)
     if not isinstance(value, expected_type):

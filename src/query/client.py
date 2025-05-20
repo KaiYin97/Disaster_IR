@@ -10,11 +10,9 @@ import tiktoken
 
 from configs.gen_config import OPENAI_API_KEY, MODEL_NAME, MAX_RETRIES, RETRY_DELAY
 
-# set API key for OpenAI client
 os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
 client = OpenAI()
 
-# initialize tokenizer for measuring token lengths
 tokenizer = tiktoken.encoding_for_model(MODEL_NAME)
 
 
@@ -22,7 +20,6 @@ def _extract_json(content: str) -> any:
     """
     Try to pull out a JSON object from the model's response.
     """
-    # look for ```json ... ``` block
     m = re.search(r'```json\s*([\s\S]*?)```', content)
     if m:
         blob = m.group(1)

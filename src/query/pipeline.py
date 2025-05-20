@@ -6,15 +6,13 @@ from pathlib import Path
 from collections import defaultdict
 from tqdm import tqdm
 
-from client import tokenizer, safe_generate
-from generators import TwitterGenerator, QAGenerator, STSGenerator, FactCheckGenerator, NLIGenerator
+from src.query.client     import tokenizer, safe_generate
+from src.query.generators import TwitterGenerator, QAGenerator, STSGenerator, FactCheckGenerator, NLIGenerator
 from configs.path_config import INPUT_DIR, OUTPUT_DIR, DOC_INPUT_DIR, DOC_OUTPUT_DIR
 from configs.gen_config import MIN_TOKENS, CHECKPOINT_SIZE, DOC_ITEMS_PER_FILE, PROMPTS_FILE
 
-# load prompt templates from JSON
 PROMPTS = json.load(open(PROMPTS_FILE, "r", encoding="utf-8"))
 
-# map short codes to generator instances
 GENS = {
     "tw":  TwitterGenerator(),
     "qa":  QAGenerator(),
@@ -24,7 +22,7 @@ GENS = {
 }
 
 
-def dump_json(path: Path, obj):
+def dump_json(path: Path, obj): 
     """
     Ensure parent dir exists and write object as pretty-printed JSON.
     """
@@ -35,7 +33,6 @@ def dump_json(path: Path, obj):
 def run_passage_tasks(filename: str, tasks: list[str], start: int | None, end: int | None):
     path = Path(INPUT_DIR) / filename
     data = json.loads(path.read_text(encoding="utf-8"))
-    # optionally slice the dataset
     data = data[start:end] if (start is not None or end is not None) else data
 
     out_root = Path(OUTPUT_DIR)
@@ -48,7 +45,6 @@ def run_passage_tasks(filename: str, tasks: list[str], start: int | None, end: i
     errs = defaultdict(list)
     for item in tqdm(data, desc=f"Passage-level ({','.join(tasks)})"):
         content = item.get("page_content", "")
-        # skip if too short
         if len(tokenizer.encode(content)) < MIN_TOKENS:
             continue
 
@@ -62,7 +58,6 @@ def run_passage_tasks(filename: str, tasks: list[str], start: int | None, end: i
         batch_cnt += 1
         dump_json(cur_out, batch)
 
-        # rotate to new file when reaching checkpoint size
         if batch_cnt >= CHECKPOINT_SIZE:
             batch_num += 1
             batch_cnt = 0
@@ -70,7 +65,6 @@ def run_passage_tasks(filename: str, tasks: list[str], start: int | None, end: i
             cur_out = out_root / f"{path.stem}_batch_{batch_num:03d}.json"
             dump_json(cur_out, [])
 
-    # write out any errors encountered
     for t, lst in errs.items():
         if lst:
             dump_json(Path(OUTPUT_DIR) / f"errors_{t}.json", lst)
@@ -96,7 +90,7 @@ def run_document_qa(start: int | None, end: int | None):
 
         # Phase 1: decide which document-level tasks apply
         tasks = safe_generate(
-            PROMPTS["doc_task"],                     # system/user prompt for task selection
+            PROMPTS["doc_task"],                     
             "Paragraph: " + json.dumps(abstract)
         )
         if not isinstance(tasks, list):
@@ -117,7 +111,6 @@ def run_document_qa(start: int | None, end: int | None):
                     "source":           info.get("source", ""),
                 })
 
-            # checkpoint when batch size reached
             if len(batch) >= DOC_ITEMS_PER_FILE:
                 dump_json(out_path, batch)
                 file_idx += 1
@@ -125,7 +118,6 @@ def run_document_qa(start: int | None, end: int | None):
                 out_path = Path(DOC_OUTPUT_DIR) / f"doc_batch_{file_idx:03d}.json"
                 dump_json(out_path, [])
 
-    # write remaining items
     if batch:
         dump_json(out_path, batch)
 

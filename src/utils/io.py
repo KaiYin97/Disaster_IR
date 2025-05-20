@@ -8,9 +8,6 @@ from typing import Any, List, Tuple
 
 
 def load_json(path: str, default: Any = None) -> Any:
-    """
-    Load a JSON file from `path`. Return `default` if file does not exist or on error.
-    """
     try:
         with open(path, "r", encoding="utf-8") as f:
             return json.load(f)
@@ -19,9 +16,6 @@ def load_json(path: str, default: Any = None) -> Any:
 
 
 def dump_json(path: str, obj: Any, indent: int = 2) -> None:
-    """
-    Write `obj` as JSON to `path`, creating parent directories if needed.
-    """
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(obj, f, ensure_ascii=False, indent=indent)
@@ -45,7 +39,6 @@ def build_ordered_corpus(corpus_dir: str, out_fp: str) -> List[str]:
             if line:
                 corpus.append(line)
 
-    # ensure output directory exists, then write
     Path(out_fp).parent.mkdir(parents=True, exist_ok=True)
     with open(out_fp, "w", encoding="utf-8") as wf:
         json.dump(corpus, wf, ensure_ascii=False, indent=2)
@@ -55,9 +48,6 @@ def build_ordered_corpus(corpus_dir: str, out_fp: str) -> List[str]:
 
 
 def load_ordered_corpus(corpus_json: str) -> List[str]:
-    """
-    Load and return the ordered corpus list from `corpus_json`.
-    """
     return json.load(open(corpus_json, encoding="utf-8"))
 
 
