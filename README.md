@@ -7,8 +7,8 @@
 3. [📈 Leaderboard](#-3leaderboard)
 4. [🔍 Workflow Overview](#-4workflow-overview)
 5. [📂 Directory Structure](#-5directory-structure)
-6. [🛠️ Installation](#-6installation)
-7. [⚙️ Configuration](#-7configuration)
+6. [🛠️ Installation](#-installation)
+7. [⚙️ Configuration](#-configuration)
 8. [🚀 Pipeline Steps](#-8pipeline-steps)
    - [1. Build Corpus](#-8-1build-corpus)
    - [2. Generate Queries](#-8-2generate-queries)
@@ -143,7 +143,7 @@ DisastIR/
 
 ---
 
-## 🛠️6.Installation
+## 🛠️Installation
 
 1. **Clone & enter project**  
    ```bash
@@ -170,7 +170,7 @@ DisastIR/
 
 ---
 
-## ⚙️7.Configuration
+## ⚙️Configuration
 
 All paths and constants are centralized:
 
