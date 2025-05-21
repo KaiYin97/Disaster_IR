@@ -24,7 +24,7 @@ Effective disaster management requires timely access to accurate and contextuall
   <img src="disasIR_workflow.jpg" width="600"/>
 </p>
 
-
+---
 ## 📈 Leaderboard
 
 | Model Name                        | Params | Bin   | QA    | QAdoc | TW    | FC    | NLI   | STS   | Exact Avg | ANN Avg |
