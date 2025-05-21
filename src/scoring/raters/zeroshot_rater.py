@@ -1,5 +1,3 @@
-# RAG/code/Disaster_IR/src/scoring/raters/zeroshot_rater.py
-
 from typing import Optional
 from openai import OpenAI
 
