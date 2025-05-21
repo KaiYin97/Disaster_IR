@@ -47,7 +47,6 @@ The following table summarizes the number of labeled query-passage pairs and the
 ---
 ## 📈 3.Leaderboard
 
-Performances of 30 evaluated information retrieval models supporting the suitable selection of IR models in disaster management scenarios:
 
 | Model Name                        | Params | Bin   | QA    | QAdoc | TW    | FC    | NLI   | STS   | Exact Avg | ANN Avg |
 |-----------------------------------|:------:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:---------:|:--------:|
