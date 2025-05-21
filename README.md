@@ -161,7 +161,7 @@ All paths and constants are centralized:
 
 ## 🚀 7.Pipeline Steps
 
-### 1. Build Corpus
+### 7-1. Build Corpus
 
 ```bash
 python scripts/build_corpus.py   --keywords_json path/to/keywords.json
@@ -202,7 +202,7 @@ python scripts/build_corpus.py   --keywords_json path/to/keywords.json
 
 ---
 
-### 2. Generate Queries
+### 7-2. Generate Queries
 
 ```bash
 python scripts/generate_queries.py --tasks all --filename chunks_001.json --start_index 0 --end_index 100
@@ -295,7 +295,7 @@ python scripts/generate_queries.py --tasks all --filename chunks_001.json --star
   ```
 ---
 
-### 3. Build Label Pool
+### 7-3. Build Label Pool
 
 The Build Label Pool step merges retrieval results into a label pool for each query set.
 
@@ -350,7 +350,7 @@ python scripts/build_label_pool.py
 
 ---
 
-### 4. Relevance Scoring
+### 7-4. Relevance Scoring
 
 ```bash
 python scripts/relevance_scoring.py   --task QA   --file_index 0   --part_index 0 
