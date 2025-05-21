@@ -46,6 +46,7 @@ The following table summarizes the number of labeled query-passage pairs and the
 ---
 ## 📈 2.Leaderboard
 
+Performances of 30 evaluated information retrieval models:
 | Model Name                        | Params | Bin   | QA    | QAdoc | TW    | FC    | NLI   | STS   | Exact Avg | ANN Avg |
 |-----------------------------------|:------:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:---------:|:--------:|
 | **inf-retriever-v1**              | 7 B    | XL    | 74.23 | 67.82 | 69.33 | 68.91 | 53.10 | 77.70 | 68.52     | 66.90     |
