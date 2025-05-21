@@ -143,7 +143,7 @@ DisastIR/
 
 ---
 
-## 🛠️ 6.Installation
+## 🛠️6.Installation
 
 1. **Clone & enter project**  
    ```bash
@@ -170,7 +170,7 @@ DisastIR/
 
 ---
 
-## ⚙️ 7.Configuration
+## ⚙️7.Configuration
 
 All paths and constants are centralized:
 
