@@ -3,18 +3,19 @@
 
 ## 📑 Table of Contents
 1. [Introduction](#introduction)
-1. [Leaderboard](#%F0%9F%93%88-leaderboard)  
-2. [Overview](#-overview)  
-3. [Directory Structure](#-directory-structure)  
-4. [Installation](#️-installation)  
-5. [Configuration](#⚙️-configuration)  
-6. [Pipeline Steps](#-pipeline-steps)  
+2. [Statistics of DisastIR](#Statistics of DisastIR) 
+3. [Leaderboard](#%F0%9F%93%88-leaderboard)  
+4. [Overview](#-overview)  
+5. [Directory Structure](#-directory-structure)  
+6. [Installation](#️-installation)  
+7. [Configuration](#⚙️-configuration)  
+8. [Pipeline Steps](#-pipeline-steps)  
    - [1. Build Corpus](#1-build-corpus)  
    - [2. Generate Queries](#2-generate-queries)  
    - [3. Build Label Pool](#3-build-label-pool)  
    - [4. Relevance Scoring](#4-relevance-scoring)  
-7. [Viewing Results](#📈-viewing-results)  
-8. [Tips](#📝-tips)  
+9. [Viewing Results](#📈-viewing-results)  
+10. [Tips](#📝-tips)  
 
 ---
 ## 📘 1.Introduction
@@ -25,7 +26,7 @@ Effective disaster management requires timely access to accurate and contextuall
 </p>
 
 ---
-### 📊 Statistics of DisastIR
+### 📊 2.Statistics of DisastIR
 
 The following table summarizes the number of labeled query-passage pairs and the average number of pairs per query (shown in parentheses) across six task types and eight disaster categories in the DisastIR benchmark:
 
@@ -44,10 +45,10 @@ The following table summarizes the number of labeled query-passage pairs and the
 
 
 ---
-## 📈 2.Leaderboard
+## 📈 3.Leaderboard
 
-Performances of 30 evaluated information retrieval models:
-| Model Name                        | Params | Bin   | QA    | QAdoc | TW    | FC    | NLI   | STS   | Exact Avg | ANN Avg |
+Performances of 30 evaluated information retrieval models supporting the suitable selection of IR models in disaster management scenarios:
+| Model Name                        | Params | Size Bin | QA    | QAdoc | TW    | FC    | NLI   | STS   | Exact Avg | ANN Avg |
 |-----------------------------------|:------:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:---------:|:--------:|
 | **inf-retriever-v1**              | 7 B    | XL    | 74.23 | 67.82 | 69.33 | 68.91 | 53.10 | 77.70 | 68.52     | 66.90     |
 | SFR-Embedding-Mistral             | 7 B    | XL    | 71.76 | 67.58 | 70.42 | 70.62 | 50.86 | 73.61 | 67.47     | 66.75     |
@@ -81,7 +82,7 @@ Performances of 30 evaluated information retrieval models:
 | gte-Qwen2-1.5B-instruct           | 1.5 B  | XL    | 13.98 | 22.21 | 19.61 | 23.90 | 18.00 | 31.20 | 21.48     | 21.27     |
 ---
 
-## 🔍 3.Workflow Overview
+## 🔍 4.Workflow Overview
 
 1. **Corpus Construction**  
    - Download disaster management-related PDFs.  
@@ -107,7 +108,7 @@ Performances of 30 evaluated information retrieval models:
 
 ---
 
-## 📂 4.Directory Structure
+## 📂 5.Directory Structure
 
 ```
 DisastIR/
@@ -142,7 +143,7 @@ DisastIR/
 
 ---
 
-## 🛠️ 5.Installation
+## 🛠️ 6.Installation
 
 1. **Clone & enter project**  
    ```bash
@@ -169,7 +170,7 @@ DisastIR/
 
 ---
 
-## ⚙️ 6.Configuration
+## ⚙️ 7.Configuration
 
 All paths and constants are centralized:
 
@@ -179,9 +180,9 @@ All paths and constants are centralized:
 
 ---
 
-## 🚀 7.Pipeline Steps
+## 🚀 8.Pipeline Steps
 
-### 7-1. Build Corpus
+### 8-1. Build Corpus
 
 ```bash
 python scripts/build_corpus.py   --keywords_json path/to/keywords.json
@@ -222,7 +223,7 @@ python scripts/build_corpus.py   --keywords_json path/to/keywords.json
 
 ---
 
-### 7-2. Generate Queries
+### 8-2. Generate Queries
 
 ```bash
 python scripts/generate_queries.py --tasks all --filename chunks_001.json --start_index 0 --end_index 100
@@ -315,7 +316,7 @@ python scripts/generate_queries.py --tasks all --filename chunks_001.json --star
   ```
 ---
 
-### 7-3. Build Label Pool
+### 8-3. Build Label Pool
 
 The Build Label Pool step merges retrieval results into a label pool for each query set.
 
@@ -370,7 +371,7 @@ python scripts/build_label_pool.py
 
 ---
 
-### 7-4. Relevance Scoring
+### 8-4. Relevance Scoring
 
 ```bash
 python scripts/relevance_scoring.py   --task QA   --file_index 0   --part_index 0 
@@ -408,7 +409,7 @@ python scripts/relevance_scoring.py   --task QA   --file_index 0   --part_index 
   ```
 ---
 
-## 📈 8.Viewing Results
+## 📈 9.Viewing Results
 
 - **Raw scores**: `outputs/scores/<task>_…_qrels.json`  
 - **Reports**: under `outputs/results`.
@@ -416,7 +417,7 @@ python scripts/relevance_scoring.py   --task QA   --file_index 0   --part_index 
 
 ---
 
-## 📝 9.Tips
+## 📝 10.Tips
 
 - Adjust `configs/*_config.py` for batch sizes, retrials.  
 - Run in parallel by splitting `file_index`/`part_index`.  
