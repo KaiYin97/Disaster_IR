@@ -6,25 +6,25 @@ We develop this end-to-end pipeline for constructing Disaster Information Retrie
 ---
 
 ## 📑 Table of Contents
-
-1. [Overview](#-overview)  
-2. [Directory Structure](#-directory-structure)  
-3. [Installation](#️-installation)  
-4. [Configuration](#⚙️-configuration)  
-5. [Pipeline Steps](#-pipeline-steps)  
+1. [Leaderboard](#%F0%9F%93%88-leaderboard)  
+2. [Overview](#-overview)  
+3. [Directory Structure](#-directory-structure)  
+4. [Installation](#️-installation)  
+5. [Configuration](#⚙️-configuration)  
+6. [Pipeline Steps](#-pipeline-steps)  
    - [1. Build Corpus](#1-build-corpus)  
    - [2. Generate Queries](#2-generate-queries)  
    - [3. Build Label Pool](#3-build-label-pool)  
    - [4. Relevance Scoring](#4-relevance-scoring)  
-6. [Viewing Results](#📈-viewing-results)  
-7. [Tips](#📝-tips)  
+7. [Viewing Results](#📈-viewing-results)  
+8. [Tips](#📝-tips)  
 
 ---
 ## 📈 Leaderboard
 
 | Model Name                        | Params | Bin   | QA    | QAdoc | TW    | FC    | NLI   | STS   | Exact Avg | ANN Avg |
 |-----------------------------------|:------:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:---------:|:--------:|
-| **inf-retriever-v1**              | 7 B    | XL    | 74.23 | 67.82 | 69.33 | 68.91 | 53.10 | 77.70 | **68.52** | **66.90** |
+| **inf-retriever-v1**              | 7 B    | XL    | 74.23 | 67.82 | 69.33 | 68.91 | 53.10 | 77.70 | 68.52     | 66.90     |
 | SFR-Embedding-Mistral             | 7 B    | XL    | 71.76 | 67.58 | 70.42 | 70.62 | 50.86 | 73.61 | 67.47     | 66.75     |
 | inf-retriever-v1-1.5b             | 1.5 B  | XL    | 70.64 | 64.42 | 66.11 | 66.53 | 53.86 | 76.19 | 66.29     | 65.54     |
 | **NV-Embed-v2**                   | 7 B    | XL    | 74.77 | 69.74 | 43.18 | 68.64 | 58.73 | 77.01 | 65.34     | 64.45     |
