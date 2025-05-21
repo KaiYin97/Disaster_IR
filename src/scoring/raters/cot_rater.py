@@ -1,5 +1,3 @@
-# RAG/code/Disaster_IR/src/scoring/raters/cot_rater.py
-
 from typing import Any, Dict, Optional, Tuple
 
 from openai import OpenAI
