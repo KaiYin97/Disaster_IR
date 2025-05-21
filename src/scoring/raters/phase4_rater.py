@@ -1,5 +1,3 @@
-# RAG/code/Disaster_IR/src/scoring/raters/phase4_rater.py
-
 from typing import Dict, Optional, Tuple
 
 from openai import OpenAI
