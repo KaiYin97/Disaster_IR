@@ -8,9 +8,6 @@ from filelock import FileLock
 from src.utils.io import load_test_file
 
 class LabelPoolBuilder:
-    """
-    Merge exact+ANN retrieval results into a single label_pool JSON per query file.
-    """
 
     def __init__(self, out_dir: str, query_emb_dir: str):
         self.out_dir       = Path(out_dir)
