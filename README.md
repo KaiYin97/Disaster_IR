@@ -80,31 +80,6 @@ The following table summarizes the number of labeled query-passage pairs and the
 | all-mpnet-base-v2                 | 109 M  | Med.  | 15.06 |  9.77 | 16.17 | 46.30 | 27.38 | 37.23 | 25.32     | 25.05     |
 | e5-mistral-7b-instruct            | 7 B    | XL    | 21.65 | 19.51 | 19.48 | 31.04 | 20.39 | 39.57 | 25.27     | 24.05     |
 | gte-Qwen2-1.5B-instruct           | 1.5 B  | XL    | 13.98 | 22.21 | 19.61 | 23.90 | 18.00 | 31.20 | 21.48     | 21.27     |
----
-
-## 🔍 4.Workflow Overview
-
-1. **Corpus Construction**  
-   - Download disaster management-related PDFs.  
-   - Extract and clean text.  
-   - Deduplicate at the file and chunk level.  
-   - Semantic chunking into passages.
-
-2. **Query Generation**  
-   - Passage-level tasks: Twitter, QA, STS, Fact-Check, NLI.  
-   - Document-level QA.
-
-3. **Retrieval & Label Pool**  
-   - Encode corpus & queries with dense models.  
-   - Build ANN indices, perform exact & approximate retrieval.  
-   - Merge top-K results into `label_pool.json`.
-
-4. **Relevance Scoring**  
-   - Rate each (query, passage) pair via three LLM-based raters:  
-     - Four-phase decomposed  
-     - Chain-of-Thought  
-     - Zero-Shot  
-   - Aggregate scores (majority vote, average).
 
 ---
 
