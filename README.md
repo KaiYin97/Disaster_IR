@@ -48,7 +48,8 @@ The following table summarizes the number of labeled query-passage pairs and the
 ## 📈 3.Leaderboard
 
 Performances of 30 evaluated information retrieval models supporting the suitable selection of IR models in disaster management scenarios:
-| Model Name                        | Params | Size Bin | QA    | QAdoc | TW    | FC    | NLI   | STS   | Exact Avg | ANN Avg |
+
+| Model Name                        | Params | Bin   | QA    | QAdoc | TW    | FC    | NLI   | STS   | Exact Avg | ANN Avg |
 |-----------------------------------|:------:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:---------:|:--------:|
 | **inf-retriever-v1**              | 7 B    | XL    | 74.23 | 67.82 | 69.33 | 68.91 | 53.10 | 77.70 | 68.52     | 66.90     |
 | SFR-Embedding-Mistral             | 7 B    | XL    | 71.76 | 67.58 | 70.42 | 70.62 | 50.86 | 73.61 | 67.47     | 66.75     |
