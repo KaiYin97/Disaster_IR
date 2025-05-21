@@ -7,7 +7,6 @@ from pathlib import Path
 
 import torch
 
-# add project root so that `src` and `configs` are on PYTHONPATH
 sys.path.append(str(Path(__file__).resolve().parent.parent))
 
 
