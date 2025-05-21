@@ -5,7 +5,7 @@
 1. [Introduction](#-1-introduction)
 2. [Statistics of DisastIR](#-2-statistics-of-disastir)
 3. [Leaderboard](#-3-leaderboard)
-4. [Overview](#-4-workflow-overview)
+4. [Workflow Overview](#-4-workflow-overview)
 5. [Directory Structure](#-5-directory-structure)
 6. [Installation](#-6installation)
 7. [Configuration](#-7configuration)
