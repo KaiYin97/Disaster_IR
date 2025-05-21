@@ -2,20 +2,20 @@
 ---
 
 ## 📑 Table of Contents
-1. [Introduction](#introduction)
-2. [Statistics of DisastIR](#statistics-of-disastir)
-3. [Leaderboard](#%F0%9F%93%88-leaderboard)  
-4. [Overview](#-overview)  
-5. [Directory Structure](#-directory-structure)  
-6. [Installation](#️-installation)  
-7. [Configuration](#⚙️-configuration)  
-8. [Pipeline Steps](#-pipeline-steps)  
-   - [1. Build Corpus](#1-build-corpus)  
-   - [2. Generate Queries](#2-generate-queries)  
-   - [3. Build Label Pool](#3-build-label-pool)  
-   - [4. Relevance Scoring](#4-relevance-scoring)  
-9. [Viewing Results](#📈-viewing-results)  
-10. [Tips](#📝-tips)  
+1. [Introduction](#-1-introduction)
+2. [Statistics of DisastIR](#-2-statistics-of-disastir)
+3. [Leaderboard](#-3-leaderboard)
+4. [Overview](#-4-workflow-overview)
+5. [Directory Structure](#-5-directory-structure)
+6. [Installation](#-6installation)
+7. [Configuration](#-7configuration)
+8. [Pipeline Steps](#-8pipeline-steps)
+   - [1. Build Corpus](#81-build-corpus)
+   - [2. Generate Queries](#82-generate-queries)
+   - [3. Build Label Pool](#83-build-label-pool)
+   - [4. Relevance Scoring](#84-relevance-scoring)
+9. [Viewing Results](#-9viewing-results)
+10. [Tips](#-10tips) 
 
 ---
 ## 📘 1.Introduction
