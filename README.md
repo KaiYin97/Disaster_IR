@@ -1,13 +1,9 @@
-# DisastIR
+# DisastIR: A Comprehensive Information Retrieval Benchmark for Disaster Management.
 The source code for **DisastIR: A Comprehensive Information Retrieval Benchmark for Disaster Management.**
-
-Effective disaster management requires timely access to accurate and contextually relevant information. Existing Information Retrieval (IR) benchmarks, however, focus primarily on general or specialized domains, such as medicine or finance, neglecting the unique linguistic complexity and diverse information needs encountered in disaster management scenarios. To bridge this gap, we introduce \textbf{DisastIR}, the first comprehensive IR evaluation benchmark specifically tailored for disaster management. DisastIR comprises 9,600 diverse user queries and more than 1.3 million labeled query-passage pairs, covering 48 distinct retrieval tasks derived from six search intents and eight general disaster categories that include 301 specific event types. Our evaluations of 30 state-of-the-art retrieval models demonstrate significant performance variances across tasks, with no single model excelling universally. Furthermore, comparative analyses reveal significant performance gaps between general-domain and disaster management-specific tasks, highlighting the necessity of disaster management-specific benchmarks for guiding IR model selection to support effective decision-making in disaster management scenarios.
-
-<img src="disasIR_workflow.jpg" width="600"/>
-
 ---
 
 ## 📑 Table of Contents
+1. [Introduction](#introduction)
 1. [Leaderboard](#%F0%9F%93%88-leaderboard)  
 2. [Overview](#-overview)  
 3. [Directory Structure](#-directory-structure)  
@@ -22,6 +18,12 @@ Effective disaster management requires timely access to accurate and contextuall
 8. [Tips](#📝-tips)  
 
 ---
+## 📘 Introduction
+Effective disaster management requires timely access to accurate and contextually relevant information. Existing Information Retrieval (IR) benchmarks, however, focus primarily on general or specialized domains, such as medicine or finance, neglecting the unique linguistic complexity and diverse information needs encountered in disaster management scenarios. To bridge this gap, we introduce \textbf{DisastIR}, the first comprehensive IR evaluation benchmark specifically tailored for disaster management. DisastIR comprises 9,600 diverse user queries and more than 1.3 million labeled query-passage pairs, covering 48 distinct retrieval tasks derived from six search intents and eight general disaster categories that include 301 specific event types. Our evaluations of 30 state-of-the-art retrieval models demonstrate significant performance variances across tasks, with no single model excelling universally. Furthermore, comparative analyses reveal significant performance gaps between general-domain and disaster management-specific tasks, highlighting the necessity of disaster management-specific benchmarks for guiding IR model selection to support effective decision-making in disaster management scenarios.
+
+<div align="center"><img src="disasIR_workflow.jpg" style="text-align:left;" alt="Overview of MT-Eval" width="80%">
+---
+
 ## 📈 Leaderboard
 
 | Model Name                        | Params | Bin   | QA    | QAdoc | TW    | FC    | NLI   | STS   | Exact Avg | ANN Avg |
