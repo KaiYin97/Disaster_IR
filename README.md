@@ -17,7 +17,7 @@
 8. [Tips](#📝-tips)  
 
 ---
-## 📘 Introduction
+## 📘 1.Introduction
 Effective disaster management requires timely access to accurate and contextually relevant information. Existing Information Retrieval (IR) benchmarks, however, focus primarily on general or specialized domains, such as medicine or finance, neglecting the unique linguistic complexity and diverse information needs encountered in disaster management scenarios. To bridge this gap, we introduce \textbf{DisastIR}, the first comprehensive IR evaluation benchmark specifically tailored for disaster management. DisastIR comprises 9,600 diverse user queries and more than 1.3 million labeled query-passage pairs, covering 48 distinct retrieval tasks derived from six search intents and eight general disaster categories that include 301 specific event types. Our evaluations of 30 state-of-the-art retrieval models demonstrate significant performance variances across tasks, with no single model excelling universally. Furthermore, comparative analyses reveal significant performance gaps between general-domain and disaster management-specific tasks, highlighting the necessity of disaster management-specific benchmarks for guiding IR model selection to support effective decision-making in disaster management scenarios.
 
 <p align="center">
@@ -25,7 +25,7 @@ Effective disaster management requires timely access to accurate and contextuall
 </p>
 
 ---
-## 📈 Leaderboard
+## 📈 2.Leaderboard
 
 | Model Name                        | Params | Bin   | QA    | QAdoc | TW    | FC    | NLI   | STS   | Exact Avg | ANN Avg |
 |-----------------------------------|:------:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:-----:|:---------:|:--------:|
@@ -61,7 +61,7 @@ Effective disaster management requires timely access to accurate and contextuall
 | gte-Qwen2-1.5B-instruct           | 1.5 B  | XL    | 13.98 | 22.21 | 19.61 | 23.90 | 18.00 | 31.20 | 21.48     | 21.27     |
 ---
 
-## 🔍 Overview
+## 🔍 3.Workflow Overview
 
 1. **Corpus Construction**  
    - Download disaster management-related PDFs.  
@@ -87,7 +87,7 @@ Effective disaster management requires timely access to accurate and contextuall
 
 ---
 
-## 📂 Directory Structure
+## 📂 4.Directory Structure
 
 ```
 DisastIR/
@@ -122,7 +122,7 @@ DisastIR/
 
 ---
 
-## 🛠️ Installation
+## 🛠️ 5.Installation
 
 1. **Clone & enter project**  
    ```bash
@@ -149,7 +149,7 @@ DisastIR/
 
 ---
 
-## ⚙️ Configuration
+## ⚙️ 6.Configuration
 
 All paths and constants are centralized:
 
@@ -159,7 +159,7 @@ All paths and constants are centralized:
 
 ---
 
-## 🚀 Pipeline Steps
+## 🚀 7.Pipeline Steps
 
 ### 1. Build Corpus
 
@@ -388,7 +388,7 @@ python scripts/relevance_scoring.py   --task QA   --file_index 0   --part_index 
   ```
 ---
 
-## 📈 Viewing Results
+## 📈 8.Viewing Results
 
 - **Raw scores**: `outputs/scores/<task>_…_qrels.json`  
 - **Reports**: under `outputs/results`.
@@ -396,7 +396,7 @@ python scripts/relevance_scoring.py   --task QA   --file_index 0   --part_index 
 
 ---
 
-## 📝 Tips
+## 📝 9.Tips
 
 - Adjust `configs/*_config.py` for batch sizes, retrials.  
 - Run in parallel by splitting `file_index`/`part_index`.  
