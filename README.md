@@ -83,6 +83,31 @@ The following table summarizes the number of labeled query-passage pairs and the
 
 ---
 
+## 🔍 4.Workflow Overview
+
+1. **Corpus Construction**  
+   - Download disaster management-related PDFs.  
+   - Extract and clean text.  
+   - Deduplicate at the file and chunk level.  
+   - Semantic chunking into passages.
+
+2. **Query Generation**  
+   - Passage-level tasks: Twitter, QA, STS, Fact-Check, NLI.  
+   - Document-level QA.
+
+3. **Retrieval & Label Pool**  
+   - Encode corpus & queries with dense models.  
+   - Build ANN indices, perform exact & approximate retrieval.  
+   - Merge top-K results into `label_pool.json`.
+
+4. **Relevance Scoring**  
+   - Rate each (query, passage) pair via three LLM-based raters:  
+     - Four-phase decomposed  
+     - Chain-of-Thought  
+     - Zero-Shot  
+   - Aggregate scores (majority vote, average).
+---
+
 ## 📂 5.Directory Structure
 
 ```
