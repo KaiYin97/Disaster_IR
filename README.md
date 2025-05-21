@@ -28,7 +28,7 @@ Effective disaster management requires timely access to accurate and contextuall
 </p>
 
 ---
-### 📊 2.Statistics of DisastIR
+## 📊 2.Statistics of DisastIR
 
 The following table summarizes the number of labeled query-passage pairs and the average number of pairs per query (shown in parentheses) across six task types and eight disaster categories in the DisastIR benchmark:
 
