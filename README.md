@@ -3,7 +3,7 @@
 
 ## 📑 Table of Contents
 1. [Introduction](#introduction)
-2. [Statistics of DisastIR](#Statistics of DisastIR) 
+2. [Statistics of DisastIR](#statistics-of-disastir)
 3. [Leaderboard](#%F0%9F%93%88-leaderboard)  
 4. [Overview](#-overview)  
 5. [Directory Structure](#-directory-structure)  
