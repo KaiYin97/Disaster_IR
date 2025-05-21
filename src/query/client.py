@@ -24,7 +24,6 @@ def _extract_json(content: str) -> any:
     if m:
         blob = m.group(1)
     else:
-        # fallback to first {...} occurrence
         m2 = re.search(r'(\{[\s\S]*\})', content)
         blob = m2.group(1) if m2 else content
     try:
