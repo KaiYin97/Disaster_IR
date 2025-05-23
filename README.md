@@ -422,3 +422,16 @@ python scripts/relevance_scoring.py   --task QA   --file_index 0   --part_index 
 - Adjust `configs/*_config.py` for batch sizes, retrials.  
 - Run in parallel by splitting `file_index`/`part_index`.  
 - Monitor OpenAI usage for quotas.
+
+---
+## Citation
+
+If you find this repository helpful, please kindly consider citing the corresponding paper as shown below. Thanks!
+
+```bibtex
+@article{yin2025disastir,
+    title={DisastIR: A Comprehensive Information Retrieval Benchmark for Disaster Management},
+    author={Yin, Kai and Dong, Xiangjue and Liu, Chengkai and Huang, Lipai and Xiao, Yiming and Liu, Zhewei and Mostafavi, Ali and Caverlee, James},
+    journal={arXiv preprint arXiv:2505.15856},
+    year={2025}
+}
