@@ -3,8 +3,7 @@
 ---
 
 ## 📜 License & Dataset Link
-- **License:** MIT License  
-- **Dataset:** [Hugging Face](https://huggingface.co/datasets/KaiYinTAMU/DisastIR)
+**License:** MIT License   ||     **Dataset:** [Hugging Face](https://huggingface.co/datasets/KaiYinTAMU/DisastIR)
 
 ---
 ## 📰 News
