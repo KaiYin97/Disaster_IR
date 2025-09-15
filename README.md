@@ -1,5 +1,16 @@
 # DisastIR: A Comprehensive Information Retrieval Benchmark for Disaster Management.
 ---
+---
+## 📜 License & Dataset Link
+- **License:** MIT License  
+- **Dataset:** [KaiYinTAMU/DisastIR on Hugging Face](https://huggingface.co/datasets/KaiYinTAMU/DisastIR)
+
+---
+## 📰 News
+- **[20/Aug]** Our *DisastIR* has been accepted to **EMNLP 2025 Findings** 🎉  
+- **[15/Sep]** *DisastIR* is now publicly available at [Hugging Face Datasets](https://huggingface.co/datasets/KaiYinTAMU/DisastIR)
+
+---
 ## 📑 Table of Contents
 
 1. [📘 Introduction](#-1introduction)
