@@ -20,6 +20,7 @@ MODEL_CONFIGS = {
     "Snowflake/snowflake-arctic-embed-l":       {"pool": "cls"},
     "Snowflake/snowflake-arctic-embed-l-v2.0":  {"pool": "cls"},
     "Snowflake/snowflake-arctic-embed-m-v2.0":  {"pool": "cls"},
+    "Snowflake/snowflake-arctic-embed-m-long":  {"pool": "cls"},
     "Alibaba-NLP/gte-Qwen2-7B-instruct":        {"pool": "last"},
     "Snowflake/snowflake-arctic-embed-m-v1.5":  {"pool": "cls"},
     "intfloat/e5-mistral-7b-instruct":          {"pool": "last"},
@@ -39,8 +40,7 @@ MODEL_CONFIGS = {
     "intfloat/e5-small-v2":                     {"pool": "mean"},
     "sentence-transformers/all-mpnet-base-v2":  {"add_pooling_layer": True}, 
     "Alibaba-NLP/gte-base-en-v1.5":             {"pool": "cls"},
-    "Alibaba-NLP/gte-large-en-v1.5":            {"pool": "cls"},
-    "llmrails/ember-v1":                        {"pool": "mean"}
+    "Alibaba-NLP/gte-large-en-v1.5":            {"pool": "cls"}
 }
 
 # Device setup
