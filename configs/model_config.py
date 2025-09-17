@@ -38,7 +38,7 @@ MODEL_CONFIGS = {
     "intfloat/e5-base-v2":                      {"pool": "mean"},
     "intfloat/e5-large-v2":                     {"pool": "mean"},
     "intfloat/e5-small-v2":                     {"pool": "mean"},
-    "sentence-transformers/all-mpnet-base-v2":  {"add_pooling_layer": True}, 
+    "thenlper/gte-small":                       {"pool": "mean"}, 
     "Alibaba-NLP/gte-base-en-v1.5":             {"pool": "cls"},
     "Alibaba-NLP/gte-large-en-v1.5":            {"pool": "cls"}
 }
